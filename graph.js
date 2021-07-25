@@ -45,12 +45,38 @@ class Graph {
 
   // this function returns an array of Node values using DFS
   depthFirstSearch(start) {
-
+    let values = [];
+    let toVisitStack = [start]
+    let seen = new Set(toVisitStack)
+    while (toVisitStack.length) {
+      let currNode = toVisitStack.pop()
+      values.push(currNode.value)
+      for (let adjNode of currNode.adjacent) {
+        if (!seen.has(adjNode)) {
+          toVisitStack.push(adjNode)
+          seen.add(adjNode)
+        }
+      }
+    }
+    return values
   }
 
   // this function returns an array of Node values using BFS
   breadthFirstSearch(start) {
-
+    let values = []
+    let toVisitQueue = [start]
+    let seen = new Set(toVisitQueue)
+    while (toVisitQueue.length) {
+      let currNode = toVisitQueue.shift()
+      values.push(currNode.value)
+      for (let adjNode of currNode.adjacent) {
+        if (!seen.has(adjNode)) {
+          toVisitQueue.push(adjNode)
+          seen.add(adjNode)
+        }
+      }
+    }
+    return values
   }
 }
 
